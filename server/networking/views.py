@@ -1,6 +1,14 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 
 
-def index(request):
-    return HttpResponse("You're at the networking server index.")
+# 경로 문제 해결해
+
+#from networking.recommendation.recommend import Recommend
+
+from sibal import Sibal
+
+def recommend(request):
+    # recObject = Recommend()
+    # recObject.set_all()
+    s = Sibal()
+    return HttpResponse("sibal")
