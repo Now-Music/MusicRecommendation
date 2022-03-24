@@ -12,6 +12,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
+# FILE_UPLOAD_HANDLERS = [
+#     'django.core.files.uploadhandler.MemoryFileUploadHandler',
+#     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+# ]
+# MAX_UPLOAD_SIZE = 5242880
+# DATA_UPLOAD_MAX_MEMORY_SIZE = None
+# FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880
+# DATA_UPLOAD_MAX_NUMBER_FIELDS = None
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +34,7 @@ SECRET_KEY = 'django-insecure-1^2%y@*39j7rzf_=*bql!_spg&)$h%pkta5j$t!c_26zgf4b+7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['218.209.110.194', 'localhost']
+ALLOWED_HOSTS = ['192.168.0.14', '218.209.110.194', 'localhost']
 
 
 # Application definition
