@@ -41,26 +41,27 @@ def genredata(request):
         return HttpResponse("succes")
 
 
-# ToDo : "`" 이 문자 포함되면 오류뜸. continue로 넘기거나 범석이형 쪽에서 해결되면 그대로 보내거나
+# ToDo : 5000까지 함. 그 뒤로 계속 ㄱㄱ. ip도 바뀌면 바껴야됨
 def songdata(request):
     with open("C:/Users/HwanKim/OneDrive/바탕 화면/projects/MusicRecommendation/server/networking/recommendation/data/song_meta.json", "r", encoding="UTF-8") as json_file:
         datas = json.load(json_file)
-        url = "http://192.168.0.11:8080/db/music/all"
+        url = "http://172.20.10.9:8080/db/music/all"
 
         headers = {'Content-Type': 'application/json'} # multipart/form-data
         result = []
-
+        testString = "asd`we`g"
+        print("string.replace test", testString.replace("`", " "))
         i = 0
         for song in datas:
-            # if i < 100:
-            #     i += 1
-            #     continue
-            if i == 262:
+            if i < 1000:
                 i += 1
                 continue
-            if i == 500:
+            if i == 5000:
                 break
+            title = song['song_name']
+            artist = song['artist_name_basket'][0]
             genre = song['song_gn_gnr_basket']
+            album = song['album_name']
             if type(genre) is not str:
                 genre = ""
             if len(song['song_gn_gnr_basket']) == 0:
@@ -68,25 +69,24 @@ def songdata(request):
             else:
                 genre = song['song_gn_gnr_basket'][0]
 
-            if "`" in song['id']:
-                song['id'].replace("`", "")
-            if "`" in song['song_name']:
-                song['song_name'].replace("`", "")
-            if "`" in song['artist_name_basket'][0]:
-                song['artist_name_basket'].replace("`", "")
-            if "`" in song['album_name']:
-                song['album_name'].replace("`", "")
+            if "`" in song["song_name"]:
+                title = title.replace("`", "")
+                print(i, title)
+            if "`" in song["artist_name_basket"][0]:
+                artist = artist.replace("`", "")
+                print(i, artist)
+            if "`" in song["album_name"]:
+                album = album.replace("`", "")
+                print(i, album)
 
             result.append({
                 'id': song['id'],
-                'title':song['song_name'],
-                'artist':song['artist_name_basket'][0],
+                'title':title,
+                'artist':artist,
                 'genre':genre,
-                'album':song['album_name']
+                'album':album
             })
-            if genre == "":
-                print(result[len(result) - 1])
-            if 258 <= i <= 262:
+            if i == 261 or i == 421:
                 print(result[len(result) - 1])
 
             i += 1

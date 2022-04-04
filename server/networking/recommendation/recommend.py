@@ -17,6 +17,7 @@ class Recommend:
         result += set_emotion(data['emotion'])
         result += set_state(data['state'])
         result += set_user_age(data['user_age'])
+        print(result)
         # 추출된 단어 목록들에 대해 랜덤 10개만 감정 데이터로 사용
         result = random.sample(result, 10)
         print("networking/recommend/set_all() :" + result)
